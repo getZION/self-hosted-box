@@ -26,7 +26,7 @@ services:
       - NODE_ENV=production
       - PORT=3001
       - PUBLIC_URL=$PUBLIC_URL
-      - NODE_SCHEME=$NODE_SCHEME
+      # - NODE_SCHEME=$NODE_SCHEME
       - NODE_DOMAIN=$NODE_DOMAIN
       - NODE_IP=$NODE_IP
       - NODE_ALIAS=$NODE_ALIAS

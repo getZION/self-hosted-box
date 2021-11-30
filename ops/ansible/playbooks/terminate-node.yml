@@ -24,7 +24,7 @@
 
 - name: Remove host from known_hosts
   connection: local
-  shell: "ssh-keygen -f "~/.ssh/known_hosts" -R {{ config.instance_name }}.{{ config.domain }}"
+  shell: "ssh-keygen -f ~/.ssh/known_hosts -R {{ config.instance_name }}.{{ config.domain }}"
 
 # - name: Remove host from known_hosts
 #   known_hosts:

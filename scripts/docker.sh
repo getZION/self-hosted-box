@@ -3,10 +3,16 @@
 
 function_menu_logs () {
   PS3='Please enter your choice: '
-    options=("logs_proxy" "logs_thunderhub" "quit")
+    options=("logs_relay" "logs_proxy" "logs_thunderhub" "quit")
     select opt in "${options[@]}"
     do
         case $opt in
+            "logs_relay")
+                cmd="docker logs --follow relay"
+                echo $cmd
+                $cmd            
+                ;;
+
             "logs_proxy")
                 cmd="docker logs --follow proxy"
                 echo $cmd
@@ -146,7 +152,7 @@ function_menu_backup () {
 
 function_menu_docker () {
   PS3='Please enter your choice: '
-    options=("compose_relay" "compose_proxy" "compose_thunderhub" "kill_relay" "kill_proxy" "kill_thundehub" "ps" "quit")
+    options=("compose_relay" "compose_proxy" "compose_thunderhub" "kill_relay" "kill_proxy" "kill_thundehub" "ps" "purge" "quit")
     select opt in "${options[@]}"
     do
         case $opt in
@@ -192,6 +198,13 @@ function_menu_docker () {
                 $cmd             
                 ;;
 
+            "purge")
+                cmd="docker system prune -a"
+                echo $cmd
+                $cmd
+                ;;
+
+
             "quit")
                 break
                 ;;
@@ -205,18 +218,12 @@ function_menu_docker () {
 }
 
 PS3='Please enter your choice: '
-options=("bash" "purge" "docker" "backup" "logs" "git_pull" "quit")
+options=("bash" "docker" "backup" "logs" "git_pull" "quit")
 select opt in "${options[@]}"
 do
     case $opt in
         "bash")            
             function_menu_bash 
-            ;;
-
-        "purge")
-            cmd="docker system prune -a"
-            echo $cmd
-            $cmd
             ;;
 
         "docker")
