@@ -144,9 +144,9 @@ function_menu_backup () {
     done
 }
 
-function_menu_compose () {
+function_menu_docker () {
   PS3='Please enter your choice: '
-    options=("compose_relay" "compose_proxy" "compose_thunderhub" "kill_relay" "kill_proxy" "kill_thundehub" "quit")
+    options=("compose_relay" "compose_proxy" "compose_thunderhub" "kill_relay" "kill_proxy" "kill_thundehub" "ps" "quit")
     select opt in "${options[@]}"
     do
         case $opt in
@@ -186,6 +186,12 @@ function_menu_compose () {
                 $cmd             
                 ;;
 
+            "ps")
+                cmd="docker ps"
+                echo $cmd
+                $cmd             
+                ;;
+
             "quit")
                 break
                 ;;
@@ -214,7 +220,7 @@ do
             ;;
 
         "docker")
-            function_menu_compose
+            function_menu_docker
             ;;
 
         "backup")            
