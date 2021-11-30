@@ -45,14 +45,14 @@
     line: "AWS_REGION={{ aws_region }}"
   become: yes
 
-- name: Set NODE_SCHEME
-  lineinfile:
-    dest: /etc/environment
-    create: yes
-    state: present
-    regexp: "^NODE_SCHEME"
-    line: "NODE_SCHEME={{ hostvars[inventory_hostname].scheme }}"
-  become: yes
+# - name: Set NODE_SCHEME
+#   lineinfile:
+#     dest: /etc/environment
+#     create: yes
+#     state: present
+#     regexp: "^NODE_SCHEME"
+#     line: "NODE_SCHEME={{ hostvars[inventory_hostname].scheme }}"
+#   become: yes
 
 - name: Set NODE_DOMAIN
   lineinfile:

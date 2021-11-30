@@ -67,7 +67,7 @@ CONNECT_UI=true
 
 ## Deploy Procedure
 1. Deploy Cluster
-```bash
+```bash 
 ./scripts/ansible.sh
 
 # Choose Option 1 start_cluster

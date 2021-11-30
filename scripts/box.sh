@@ -218,7 +218,7 @@ function_menu_docker () {
 }
 
 PS3='Please enter your choice: '
-options=("bash" "docker" "backup" "logs" "git_pull" "quit")
+options=("bash" "docker" "backup" "logs" "git_pull" "copy_conf" "quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -236,6 +236,12 @@ do
 
         "logs")
             function_menu_logs          
+            ;;
+
+        "copy_conf")
+            cmd="cp docker/lnd.conf.sample .lnd/lnd.conf"
+            echo $cmd
+            $cmd            
             ;;
 
         "git_pull")
