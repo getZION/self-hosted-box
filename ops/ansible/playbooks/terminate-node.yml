@@ -27,12 +27,14 @@
     path: ~/.ssh/known_hosts
     name: "{{ config.instance_name }}.{{ config.domain }}"
     state: "absent"
+  become: yes
 
 - name: Remove host from known_hosts
   known_hosts:
     path: ~/.ssh/known_hosts
     name: "{{ ec2.instances[0].public_dns_name }}"
     state: "absent"
+  become: yes
 
 - name: Retrieve the Records First
   route53:
@@ -45,16 +47,31 @@
 - name: display the record
   debug: var=rec
 
+# - name: Route 53 Delete Records
+#   route53:
+#     state: absent
+#     zone: "{{ config.domain }}"
+#     record: "{{ config.instance_name }}.{{ config.domain }}"
+#     type: "{{ rec.set.type }}"
+#     ttl: "{{ rec.set.ttl }}"
+#     value: "{{ rec.set.value }}"
+#     wait: yes
+#   register: result
+
+# - name: display results
+#   debug: var=result
+
 - name: Route 53 Delete Records
   route53:
     state: absent
     zone: "{{ config.domain }}"
     record: "{{ config.instance_name }}.{{ config.domain }}"
-    type: "{{ rec.set.type }}"
-    ttl: "{{ rec.set.ttl }}"
-    value: "{{ rec.set.value }}"
+    type: "{{ rec.set.Type }}"
+    ttl: "{{ rec.set.TTL }}"
+    value: "{{ rec.set.ResourceRecords[0].Value }}"
     wait: yes
   register: result
+  when: config.route53
 
 - name: display results
   debug: var=result

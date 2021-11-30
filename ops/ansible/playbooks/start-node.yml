@@ -103,6 +103,7 @@
     public_ip: "{{ eip.public_ip }}"
     testnet: "{{ config.testnet }}"
     domain: "{{ config.domain }}"
+    scheme: "{{ config.scheme }}"
 
 - name: Add to Route 53
   community.aws.route53:

@@ -28,7 +28,7 @@ Here is a video demo -> https://streamable.com/dc5hf3
 
 1. Create ansible vars file ops/ansible/playbooks/group_vars/all.yml (Ansible will use these values to set up your cluster)
 
-```
+```bash
 aws_access_key: [YOUR_AWS_KEY]
 aws_secret_key: [YOUR_AWS_SECRET]
 aws_region: [YOUR_AWS_REGION]
@@ -51,13 +51,15 @@ media_host_staging: null
 media_host_protocol: "https"
 ```
 
+[Use Reference](ops/ansible/playbooks/group_vars/all.yml)
+
 2. Create ops/ansible/playbooks/roles/zion/vars/.env (Ansible will use these values to setup your EC2 instances, relay docker container and lnd)
    
-```
+```bash
 CONNECT_UI=true
 ```
 
-[Use Reference](ops/ansible/playbooks/roles/play/tasks/main.yml)
+[Use Reference](ops/ansible/playbooks/roles/zion/tasks/main.yml)
 
 3. Modify cluster parameters to reflect the relevant domain/subdomain where you plan accessing you Zion relay.
 [cluster_configs](ops/ansible/playbooks/cluster_configs.yml) 
@@ -65,13 +67,18 @@ CONNECT_UI=true
 
 ## Deploy Procedure
 1. Deploy Cluster
-```
+```bash
 ./scripts/ansible.sh
 
-Choose Option 1 start_cluster
+# Choose Option 1 start_cluster
 ```
 
-2. Go to http://yourdomain.com:3001/connect for your access key.
+1. Go to https://yourdomain.com/connect for your access key.
+
+```bash
+# example
+curl https://box-1.n2n2.chat/connect
+```
    
 WARNING:
 The following deploys a box without TLS access, use this at your own risk.

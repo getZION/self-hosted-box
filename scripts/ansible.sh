@@ -8,7 +8,7 @@ function_menu_ssh () {
     do
         case $opt in
             "box_1")
-                cmd="ssh -i ~/.ssh/zion ubuntu@box-1.getzion.com"
+                cmd="ssh -i ~/.ssh/zion ubuntu@box-1.n2n2.chat"
                 echo $cmd
                 $cmd      
                 ;;

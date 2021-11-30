@@ -2,7 +2,8 @@
 cluster_configs:
   - {
       instance_type: "t3.large",
-      instance_name: "relay-1",
+      instance_name: "box-1",
       testnet: false,
-      domain: "playentertainment.online",
+      domain: "n2n2.chat",
+      scheme: "https",
     }

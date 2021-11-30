@@ -45,6 +45,15 @@
     line: "AWS_REGION={{ aws_region }}"
   become: yes
 
+- name: Set NODE_SCHEME
+  lineinfile:
+    dest: /etc/environment
+    create: yes
+    state: present
+    regexp: "^NODE_SCHEME"
+    line: "NODE_SCHEME={{ hostvars[inventory_hostname].scheme }}"
+  become: yes
+
 - name: Set NODE_DOMAIN
   lineinfile:
     dest: /etc/environment
@@ -52,6 +61,15 @@
     state: present
     regexp: "^NODE_DOMAIN"
     line: "NODE_DOMAIN={{ inventory_hostname }}"
+  become: yes
+
+- name: Set PUBLIC_URL
+  lineinfile:
+    dest: /etc/environment
+    create: yes
+    state: present
+    regexp: "^PUBLIC_URL"
+    line: "PUBLIC_URL={{ hostvars[inventory_hostname].scheme }}://{{ inventory_hostname }}"
   become: yes
 
 - name: Set NODE_IP
