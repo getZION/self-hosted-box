@@ -152,7 +152,7 @@ function_menu_backup () {
 
 function_menu_docker () {
   PS3='Please enter your choice: '
-    options=("compose_relay" "compose_proxy" "compose_thunderhub" "kill_relay" "kill_proxy" "kill_thundehub" "ps" "purge" "quit")
+    options=("compose_relay" "compose_proxy" "compose_thunderhub" "kill_relay" "kill_proxy" "kill_thundehub" "ps" "prune" "quit")
     select opt in "${options[@]}"
     do
         case $opt in
@@ -198,7 +198,7 @@ function_menu_docker () {
                 $cmd             
                 ;;
 
-            "purge")
+            "prune")
                 cmd="docker system prune -a"
                 echo $cmd
                 $cmd
@@ -239,7 +239,7 @@ do
             ;;
 
         "copy_conf")
-            cmd="cp docker/lnd.conf.sample .lnd/lnd.conf"
+            cmd="cp docker/lnd.sample.conf .lnd/lnd.conf"
             echo $cmd
             $cmd            
             ;;

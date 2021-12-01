@@ -75,7 +75,6 @@
     value: "{{ rec.set.ResourceRecords[0].Value }}"
     wait: yes
   register: result
-  when: config.route53
 
 - name: display results
   debug: var=result
