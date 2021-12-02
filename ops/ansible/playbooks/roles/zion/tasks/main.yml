@@ -8,6 +8,9 @@
 - name: Print testnet information
   debug: var=hostvars[inventory_hostname].testnet
 
+- name: Print alias
+  debug: var=hostvars[inventory_hostname].alias
+
 - name: Print ansible_hostname
   debug: var=ansible_host
 
@@ -79,6 +82,15 @@
     state: present
     regexp: "^NODE_IP"
     line: "NODE_IP={{ ansible_host }}"
+  become: yes
+
+- name: Set NODE_ALIAS
+  lineinfile:
+    dest: /etc/environment
+    create: yes
+    state: present
+    regexp: "^NODE_ALIAS"
+    line: "NODE_ALIAS={{ hostvars[inventory_hostname].alias }}"
   become: yes
 
 - name: Set COMMUNITIES_HOST
@@ -225,9 +237,10 @@
   become: yes
   when: not hostvars[inventory_hostname].testnet
 
-- name: Insert alias
-  shell: >
-    cd /box && awk 'NR==3{print "alias={{ hostvars[inventory_hostname].alias}}"}1' .lnd/lnd.conf
+- name: Setup .lnd
+  shell: |
+    NODE_ALIAS={{ hostvars[inventory_hostname].alias }}
+    awk -v n=3 -v s="alias=$NODE_ALIAS" 'NR == n {print s} {print}' /box/docker/lnd.sample.conf > /box/.lnd/lnd.conf
   become: yes
   when: not hostvars[inventory_hostname].testnet
 

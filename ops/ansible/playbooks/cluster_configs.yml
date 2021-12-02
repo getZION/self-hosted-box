@@ -2,8 +2,8 @@
 cluster_configs:
   - {
       instance_type: "t3.large",
-      instance_name: "box-4",
-      alias: "zion-box-4",
+      instance_name: "box-6",
+      alias: "zion-box-6",
       testnet: false,
       domain: "n2n2.chat",
       scheme: "https",

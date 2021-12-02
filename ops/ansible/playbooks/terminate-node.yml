@@ -22,24 +22,6 @@
     aws_access_key: "{{ aws_access_key }}"
     aws_secret_key: "{{ aws_secret_key }}"
 
-- name: Remove host from known_hosts
-  connection: local
-  shell: "ssh-keygen -f ~/.ssh/known_hosts -R {{ config.instance_name }}.{{ config.domain }}"
-
-# - name: Remove host from known_hosts
-#   known_hosts:
-#     path: ~/.ssh/known_hosts
-#     name: "{{ config.instance_name }}.{{ config.domain }}"
-#     state: "absent"
-#   become: yes
-
-# - name: Remove host from known_hosts
-#   known_hosts:
-#     path: ~/.ssh/known_hosts
-#     name: "{{ ec2.instances[0].public_dns_name }}"
-#     state: "absent"
-#   become: yes
-
 - name: Retrieve the Records First
   route53:
     state: get
@@ -78,3 +60,20 @@
 
 - name: display results
   debug: var=result
+
+- name: Remove host from known_hosts
+  connection: local
+  shell: "ssh-keygen -f ~/.ssh/known_hosts -R {{ config.instance_name }}.{{ config.domain }}"
+# - name: Remove host from known_hosts
+#   known_hosts:
+#     path: ~/.ssh/known_hosts
+#     name: "{{ config.instance_name }}.{{ config.domain }}"
+#     state: "absent"
+#   become: yes
+
+# - name: Remove host from known_hosts
+#   known_hosts:
+#     path: ~/.ssh/known_hosts
+#     name: "{{ ec2.instances[0].public_dns_name }}"
+#     state: "absent"
+#   become: yes
