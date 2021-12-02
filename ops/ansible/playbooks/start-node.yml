@@ -97,13 +97,14 @@
     ansible_host: "{{ eip.public_ip }}"
     ansible_connection: "ssh"
     ansible_user: "ubuntu"
-    ansible_ssh_private_key_file: "~/.ssh/zion"
+    ansible_ssh_private_key_file: "~/.ssh/box"
     ansible_python_interpreter: "/usr/bin/python3"
     ec2: "{{ ec2 }}"
     public_ip: "{{ eip.public_ip }}"
     testnet: "{{ config.testnet }}"
     domain: "{{ config.domain }}"
     scheme: "{{ config.scheme }}"
+    alias: "{{ config.alias }}"
 
 - name: Add to Route 53
   community.aws.route53:

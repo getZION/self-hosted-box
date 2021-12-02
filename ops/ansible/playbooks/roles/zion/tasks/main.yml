@@ -225,6 +225,12 @@
   become: yes
   when: not hostvars[inventory_hostname].testnet
 
+- name: Insert alias
+  shell: >
+    cd /box && awk 'NR==3{print "alias={{ hostvars[inventory_hostname].alias}}"}1' .lnd/lnd.conf
+  become: yes
+  when: not hostvars[inventory_hostname].testnet
+
 # - name: Modify thunderhub accounts.
 #   template: >
 #     src=templates/thubConfig.yaml.j2

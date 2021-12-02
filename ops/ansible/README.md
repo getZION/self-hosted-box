@@ -30,5 +30,5 @@ docker ps -q | xargs -L 1 docker logs -f
 
 ### Bash
 ```
-ssh -i ~/.ssh/zion ubuntu@box-1.getzion.com
+ssh -i ~/.ssh/box ubuntu@box-1.getzion.com
 ```
