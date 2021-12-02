@@ -75,10 +75,16 @@ function_menu_bash () {
 
 function_menu_backup () {
   PS3='Please enter your choice: '
-    options=("pull_backup" "push_backup" "apply_backup" "quit")
+    options=("tar_lnd" "pull_backup" "push_backup" "apply_backup" "quit")
     select opt in "${options[@]}"
     do
         case $opt in
+            "tar_lnd")
+                cmd="tar -cvzf export.tar.gz .lnd"
+                echo $cmd
+                $cmd    
+                ;;
+
             "pull_backup")
                 cmd="export CTR_ID=$(docker ps -q -f name=relay)"
                 echo $cmd
