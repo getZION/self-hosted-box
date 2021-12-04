@@ -3,7 +3,7 @@
 
 function_menu_backup () {
   PS3='Please enter your choice: '
-    options=("pull_lnd" "quit")
+    options=("pull_lnd" "hex_macaroon" "quit")
     select opt in "${options[@]}"
     do
         case $opt in
@@ -13,6 +13,12 @@ function_menu_backup () {
                 $cmd      
                 ;;
                 
+            "hex_macaroon")
+                cmd="xxd -plain -c 1000  /box/.lnd/data/chain/bitcoin/mainnet/admin.macaroon"
+                echo $cmd
+                $cmd      
+                ;;
+
             "quit")
                 break
                 ;;
@@ -50,7 +56,7 @@ function_menu_ssh () {
 }
 
 PS3='Please enter your choice: '
-options=("start_cluster" "terminate_cluster" "ssh" "quit")
+options=("start_cluster" "terminate_cluster" "ssh" "backup" "quit")
 select opt in "${options[@]}"
 do
     case $opt in
