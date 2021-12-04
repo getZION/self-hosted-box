@@ -16,3 +16,5 @@ thubConfig.tpl.yaml
 thubConfig.yaml.j2
 
 .DS_Store
+
+ops/ansible/playbooks/cluster_configs.yml

@@ -1,7 +1,8 @@
 # self-hosted-box
 
-The following is the manual detailing steps for self-hosting  Zion relay cluster on AWS.
-Here is a video demo -> https://streamable.com/dc5hf3
+The following is the manual detailing steps for self-hosting a Zion relay node on AWS.
+
+Here is a video demo -> https://streamable.com/dc5hf3 (Possibly outdated)
 
 ## Requirements
 1. macOS + ansible [Details](ops/ansible/README.md)
@@ -16,17 +17,18 @@ Here is a video demo -> https://streamable.com/dc5hf3
      (EC2 will use this key in order to pull source from this repo.)
 
 3. AWS Account + relevant keys
-    1. Generate IAM User with administrator access, put into config (all.yml) below [YOUR_AWS_KEY] [YOUR_SECRET_KEY]
-    2. Generate EC2 keypair in AWS console [YOUR_EC2_KEYPAIR_NAME]
+    1. Generate IAM User with administrator access [YOUR_AWS_KEY] [YOUR_SECRET_KEY] (Use at 2 below)
+    2. Generate EC2 keypair in your AWS console [YOUR_EC2_KEYPAIR_NAME] (Use at 2 below)
     3. Put at
 
     ```
     ~/.ssh
     ```
+    4. Find your vpc_id in your AWS console [YOUR_EC2_CLUSTER_ID] (Use at 2 below)
 
 ## Initial Setup
 
-1. Create ansible vars file ops/ansible/playbooks/group_vars/all.yml (Ansible will use these values to set up your cluster)
+1. Create ansible vars file ops/ansible/playbooks/group_vars/all.yml (Ansible will use these values to set up your cluster) inside this project if does not exist.
 
 ```bash
 aws_access_key: [YOUR_AWS_KEY]
@@ -53,7 +55,7 @@ media_host_protocol: "https"
 
 [Use Reference](ops/ansible/playbooks/group_vars/all.yml)
 
-2. Create ops/ansible/playbooks/roles/zion/vars/.env (Ansible will use these values to setup your EC2 instances, relay docker container and lnd)
+2. Create ops/ansible/playbooks/roles/zion/vars/.env (Ansible will use these values to setup your EC2 instances, relay docker container and lnd) inside this project if does not exist.
    
 ```bash
 CONNECT_UI=true
@@ -61,11 +63,24 @@ CONNECT_UI=true
 
 [Use Reference](ops/ansible/playbooks/roles/zion/tasks/main.yml)
 
-3. Modify cluster parameters to reflect the relevant domain/subdomain where you plan accessing you Zion relay.
+3. Create ops/ansible/playbooks/cluster_configs.yml if does not exist.
+   (Modify cluster parameters to reflect the relevant domain/subdomain where you plan accessing your Zion relay )
+
+```yaml
+cluster_configs:
+  - {
+      instance_type: "t3.large",
+      instance_name: "box-1",
+      alias: "zion-box-1",
+      testnet: false,
+      domain: "n2n2.chat",
+      scheme: "https",
+    }
+```
+
 [cluster_configs](ops/ansible/playbooks/cluster_configs.yml) 
 
-
-## Deploy Procedure
+## Deploy Your Cluster
 1. Deploy Cluster
 ```bash 
 ./scripts/ansible.sh
@@ -73,12 +88,9 @@ CONNECT_UI=true
 # Choose Option 1 start_cluster
 ```
 
-1. Go to https://yourdomain.com/connect for your access key.
+1. Go to https://box-1.n2n2.chat/connect for your access key. (Use domain/subdomain from above)
 
 ```bash
 # example
 curl https://box-1.n2n2.chat/connect
 ```
-   
-WARNING:
-The following deploys a box without TLS access, use this at your own risk.
