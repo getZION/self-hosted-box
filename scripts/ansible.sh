@@ -3,18 +3,12 @@
 
 function_menu_backup () {
   PS3='Please enter your choice: '
-    options=("pull_lnd" "hex_macaroon" "quit")
+    options=("pull_lnd" "quit")
     select opt in "${options[@]}"
     do
         case $opt in
             "pull_lnd")
                 cmd="scp -i ~/.ssh/box -r ubuntu@box-6.n2n2.chat:/box/export.tar.gz ."
-                echo $cmd
-                $cmd      
-                ;;
-                
-            "hex_macaroon")
-                cmd="xxd -plain -c 1000  /box/.lnd/data/chain/bitcoin/mainnet/admin.macaroon"
                 echo $cmd
                 $cmd      
                 ;;
