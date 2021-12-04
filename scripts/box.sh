@@ -75,7 +75,7 @@ function_menu_bash () {
 
 function_menu_backup () {
   PS3='Please enter your choice: '
-    options=("tar_lnd" "pull_backup" "push_backup" "apply_backup" "hex_macaroon" "quit")
+    options=("tar_lnd" "pull_backup" "push_backup" "apply_backup" "macaroon" "cert" "quit")
     select opt in "${options[@]}"
     do
         case $opt in
@@ -145,8 +145,14 @@ function_menu_backup () {
                 $cmd     
                 ;;
             
-            "hex_macaroon")
-                cmd="xxd -plain -c 1000  /box/.lnd/data/chain/bitcoin/mainnet/admin.macaroon"
+            "macaroon")
+                cmd="base64 -w0 /box/.lnd/data/chain/bitcoin/mainnet/admin.macaroon"
+                echo $cmd
+                $cmd      
+                ;;
+
+            "cert")
+                cmd="base64 -w0 /box/.lnd/tls.cert"
                 echo $cmd
                 $cmd      
                 ;;
