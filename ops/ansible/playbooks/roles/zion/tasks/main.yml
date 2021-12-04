@@ -223,7 +223,7 @@
     dest: ~/.profile
     create: yes
     state: present
-    line: "cd /box"
+    line: "cd {{ src_path }}"
 
 - name: Modify .profile
   lineinfile:
@@ -233,14 +233,14 @@
     line: "sudo -s"
 
 - name: Setup .lnd
-  shell: "cd /box && mkdir .lnd && cp docker/lnd.sample.conf .lnd/lnd.conf"
+  shell: "cd {{ src_path }} && mkdir .lnd && cp docker/lnd.sample.conf .lnd/lnd.conf"
   become: yes
   when: not hostvars[inventory_hostname].testnet
 
 - name: Setup .lnd
   shell: |
     NODE_ALIAS={{ hostvars[inventory_hostname].alias }}
-    awk -v n=3 -v s="alias=$NODE_ALIAS" 'NR == n {print s} {print}' /box/docker/lnd.sample.conf > /box/.lnd/lnd.conf
+    awk -v n=3 -v s="alias=$NODE_ALIAS" 'NR == n {print s} {print}' {{ src_path }}/docker/lnd.sample.conf > {{ src_path }}/.lnd/lnd.conf
   become: yes
   when: not hostvars[inventory_hostname].testnet
 
@@ -258,16 +258,16 @@
 #   become: yes
 
 - name: Start container [proxy]
-  shell: "cd /box && docker-compose -f docker-compose.proxy.yml up -d"
+  shell: "cd {{ src_path }} && docker-compose -f docker-compose.proxy.yml up -d"
   become: yes
   when: not hostvars[inventory_hostname].testnet
 
 - name: Start container [relay]
-  shell: "cd /box && docker-compose up -d"
+  shell: "cd {{ src_path }} && docker-compose up -d"
   become: yes
   when: not hostvars[inventory_hostname].testnet
 
 - name: Start container [relay] [testnet]
-  shell: "cd /box && docker-compose -f docker-compose-testnet.yml up -d"
+  shell: "cd {{ src_path }} && docker-compose -f docker-compose-testnet.yml up -d"
   become: yes
   when: hostvars[inventory_hostname].testnet
