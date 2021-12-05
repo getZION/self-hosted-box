@@ -6,6 +6,7 @@ services:
   relay:
     volumes:
       - .lnd/:/relay/.lnd
+      - ./sphinx.db:/relay/sphinx.db
 
     container_name: relay
     image: n2n2/n2n2-relay
