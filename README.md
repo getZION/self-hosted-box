@@ -94,3 +94,9 @@ cluster_configs:
 # example
 curl https://box-1.n2n2.chat/connect
 ```
+
+2. Check letsencrypt
+
+```
+https://crt.sh/?q=box-6.n2n2.chat
+```
