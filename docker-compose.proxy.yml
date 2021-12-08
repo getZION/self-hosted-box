@@ -8,7 +8,6 @@ services:
     # The official v2 Traefik docker image
     image: traefik:v2.2.1
     # Enables the web UI and tells Traefik to listen to docker
-    # command: --configFile=/home/ec2-user/sphinx-deploy/traefik.yaml
     command:
       # - "--log.level=DEBUG"
       - "--logLevel=DEBUG"
