@@ -98,5 +98,29 @@ curl https://box-1.n2n2.chat/connect
 2. Check letsencrypt
 
 ```
-https://crt.sh/?q=box-6.n2n2.chat
+https://crt.sh/?q=box-1.n2n2.chat
+```
+
+3. Establish route to Zion.
+
+```bash
+./scripts/ansible.sh
+# Choose Option 3 ssh
+# Choose Option 1 box
+
+# inside box
+./scripts/box.sh
+# Choose Option 1 bash
+# Choose Option 1 bash_relay
+
+# inside relay container
+./scripts/relay.sh
+# Choose Option 1 lncli
+# Choose Option 2 create_wallet
+
+# Send desired balance to generated p2sh address
+
+# Peer node https://1ml.com/node/029f96fe33e4c3db0a7dc4039fb9e2a792bb99ef62589c9932bce2a59a06b650d7
+# Open channel
+
 ```
