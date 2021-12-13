@@ -67,6 +67,7 @@ CONNECT_UI=true
    (Modify cluster parameters to reflect the relevant domain/subdomain where you plan accessing your Zion relay )
 
 ```yaml
+---
 cluster_configs:
   - {
       instance_type: "t3.large",
