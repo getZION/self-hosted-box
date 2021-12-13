@@ -89,12 +89,7 @@ cluster_configs:
 # Choose Option 1 start_cluster
 ```
 
-1. Go to https://box-1.n2n2.chat/connect for your access key. (Use domain/subdomain from above)
-
-```bash
-# example
-curl https://box-1.n2n2.chat/connect
-```
+1. Open your favorite browser and go to https://box-1.n2n2.chat/connect to obtain your access key/qr-code. (Use scheme/domain/subdomain combination from above)
 
 2. Check letsencrypt
 
