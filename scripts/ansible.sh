@@ -1,7 +1,9 @@
 #!/bin/bash
 # Bash Menu Script Example
 
-URL=ubuntu@box-6.n2n2.chat
+KEYPAIR="n2n2"
+URL_1=ubuntu@box-1.n2n2.chat
+URL_6=ubuntu@box-6.n2n2.chat
 
 function_menu_backup () {
   PS3='Please enter your choice: '
@@ -10,7 +12,8 @@ function_menu_backup () {
     do
         case $opt in
             "pull_lnd")
-                cmd="scp -i ~/.ssh/box -r $URL:/box/export.tar.gz ."
+                # cmd="scp -i ~/.ssh/box -r $URL:/box/export.tar.gz ."
+                cmd="NOT_IMPLEMENTED"
                 echo $cmd
                 $cmd      
                 ;;
@@ -29,12 +32,18 @@ function_menu_backup () {
 
 function_menu_ssh () {
   PS3='Please enter your choice: '
-    options=("box" "quit")
+    options=("box-1" "box-6" "quit")
     select opt in "${options[@]}"
     do
         case $opt in
-            "box")
-                cmd="ssh -i ~/.ssh/box $URL"
+            "box-1")
+                cmd="ssh -i ~/.ssh/$KEYPAIR $URL_1"
+                echo $cmd
+                $cmd      
+                ;;
+            
+            "box-6")
+                cmd="ssh -i ~/.ssh/$KEYPAIR $URL_6"
                 echo $cmd
                 $cmd      
                 ;;
